@@ -14,9 +14,11 @@
     "start": "next start"
   },
   "prisma": {
+    "schema": "./node_modules/@automated-ab-testing/shared-prisma-schema/schema.prisma",
     "seed": "tsx ./prisma/seed.ts"
   },
   "dependencies": {
+    "@automated-ab-testing/shared-prisma-schema": "https://github.com/automated-ab-testing/shared-prisma-schema.git#2557432927f927ea3e11084fb7ffec2a86143367",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.6.0",
