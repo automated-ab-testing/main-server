@@ -15,7 +15,7 @@
   },
   "prisma": {
     "schema": "./node_modules/@automated-ab-testing/shared-prisma-schema/schema.prisma",
-    "seed": "tsx ./prisma/seed.ts"
+    "seed": "tsx ./node_modules/@automated-ab-testing/shared-prisma-schema/index.ts"
   },
   "dependencies": {
     "@automated-ab-testing/shared-prisma-schema": "https://github.com/automated-ab-testing/shared-prisma-schema.git#2557432927f927ea3e11084fb7ffec2a86143367",
