@@ -45,7 +45,7 @@ const getInitialData = cache(async () => {
       };
 
     // Randomly select one active test (deterministically using the seed)
-    const randomTestIdx = rng.int32() % activeTests.length;
+    const randomTestIdx = Math.abs(rng.int32()) % activeTests.length;
     const randomTest = activeTests[randomTestIdx];
 
     if (!randomTest)
@@ -83,7 +83,7 @@ const getInitialData = cache(async () => {
 
     // Randomly select one version in the active test (deterministically using the seed)
     // NOTE: Distribusi peluang dapat diubah dengan menggunakan HMM
-    const randomVersionIdx = rng.int32() % versions.length;
+    const randomVersionIdx = Math.abs(rng.int32()) % versions.length;
     const randomVersion = versions[randomVersionIdx];
 
     if (!randomVersion)
