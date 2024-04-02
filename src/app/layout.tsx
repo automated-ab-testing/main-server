@@ -1,9 +1,9 @@
-import { getServerAuthSession } from "~/server/auth";
 import AuthProvider from "~/providers/AuthProvider";
 import ComponentProvider from "~/providers/ComponentProvider";
+import ThemeProvider from "~/providers/ThemeProvider";
+import { getServerAuthSession } from "~/server/auth";
 
 import "~/styles/globals.css";
-import ThemeProvider from "~/providers/ThemeProvider";
 
 export const metadata = {
   title: "Automated A/B Testing",
