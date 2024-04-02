@@ -1,4 +1,4 @@
-import getInitialData from "~/utils/user/get-initial-data";
+import getFeatureFlags from "~/utils/user/get-feature-flags";
 
 export default async function ServerComponentWrapper({
   renderDefault,
@@ -6,15 +6,13 @@ export default async function ServerComponentWrapper({
 }: {
   renderDefault: () => React.ReactElement;
   renderTest: (props: {
-    versionId: string;
     featureFlags: Record<string, boolean>;
   }) => React.ReactElement;
 }) {
-  // Get the initial data (cached on the server)
-  const { versionId, featureFlags } = await getInitialData();
+  // Get the feature flags
+  const featureFlags = await getFeatureFlags();
 
-  // If there is no data, return the default render
-  if (!versionId) return renderDefault();
+  if (Object.keys(featureFlags).length === 0) return renderDefault();
 
-  return renderTest({ versionId, featureFlags });
+  return renderTest({ featureFlags });
 }

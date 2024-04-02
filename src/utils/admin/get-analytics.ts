@@ -44,7 +44,7 @@ const getAnalytics = cache(async (args: { testId: string }) => {
           version: {
             testId,
           },
-          isClicked: true,
+          isConsentClicked: true,
         },
         _count: {
           id: true,

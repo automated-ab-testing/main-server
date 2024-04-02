@@ -1,15 +1,22 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 import { db } from "~/server/db";
 
 const incrementClickCount = async () => {
+  // Get the event log id from the cookies
+  const eventLogId = cookies().get("event-log-id");
+
+  if (!eventLogId) return;
+
   // Update the event log
   await db.eventLog.update({
     where: {
-      deviceId: "bf993b57-db0e-451c-9616-d3525932c4bf",
+      id: eventLogId.value,
     },
     data: {
-      isClicked: true,
+      isConsentClicked: true,
     },
   });
 };

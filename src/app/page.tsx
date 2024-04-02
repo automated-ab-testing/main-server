@@ -1,10 +1,10 @@
 import { Button } from "@nextui-org/react";
 
-import { getServerAuthSession } from "~/server/auth";
 import ServerComponentWrapper from "~/wrappers/ServerComponentWrapper";
-import DisplayVersion from "~/components/main/DisplayVersion";
 import ClientComponent from "~/components/main/ClientComponent";
+import CookieButton from "~/components/footer/CookieButton";
 import DataCard from "~/components/analytics/DataCard";
+import { getServerAuthSession } from "~/server/auth";
 
 export default async function HomePage({
   searchParams,
@@ -25,16 +25,13 @@ export default async function HomePage({
         <DataCard test={test} />
       ) : (
         <>
-          <DisplayVersion />
+          <CookieButton />
           <ServerComponentWrapper
             renderDefault={() => (
               <Button className="bg-green-500">Default Button</Button>
             )}
-            renderTest={({ versionId, featureFlags }) => (
-              <ClientComponent
-                versionId={versionId}
-                featureFlags={featureFlags}
-              />
+            renderTest={({ featureFlags }) => (
+              <ClientComponent featureFlags={featureFlags} />
             )}
           />
         </>

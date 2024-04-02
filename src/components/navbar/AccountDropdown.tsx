@@ -27,13 +27,13 @@ export default function AccountDropdown() {
             key="sign-out"
             className="text-danger"
             color="danger"
-            onPress={() => void signOut()}
+            onPress={async () => await signOut()}
           >
-            Sign Out
+            Sign Out for Admin
           </DropdownItem>
         ) : (
-          <DropdownItem key="sign-in" onPress={() => void signIn()}>
-            Sign In
+          <DropdownItem key="sign-in" onPress={async () => await signIn()}>
+            Sign In for Admin
           </DropdownItem>
         )}
       </DropdownMenu>
