@@ -2,24 +2,12 @@ import "server-only";
 
 import { cache } from "react";
 import seedrandom from "seedrandom";
-import { UserRole } from "@prisma/client";
 
-import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
 const getInitialData = cache(async () => {
-  // Get the server session
-  const session = await getServerAuthSession();
-
-  // If the user is not authenticated or not a user, return empty data
-  if (!session || !session.user || session.user.role !== UserRole.USER)
-    return {
-      versionId: null,
-      featureFlags: {} as Record<string, boolean>,
-    };
-
   // Define the seed for the random number generator
-  const rng = seedrandom(session.user.id);
+  const rng = seedrandom("bf993b57-db0e-451c-9616-d3525932c4bf");
 
   const { versionId, rawFeatureFlags } = await db.$transaction(async (tx) => {
     // Get all active tests

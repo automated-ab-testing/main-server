@@ -1,5 +1,4 @@
 import { Button } from "@nextui-org/react";
-import { UserRole } from "@prisma/client";
 
 import { getServerAuthSession } from "~/server/auth";
 import ServerComponentWrapper from "~/wrappers/ServerComponentWrapper";
@@ -22,9 +21,7 @@ export default async function HomePage({
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 py-2">
-      {!session || !session.user ? (
-        <p className="text-xl">Login to continue!</p>
-      ) : session.user.role === UserRole.ADMIN ? (
+      {session !== null ? (
         <DataCard test={test} />
       ) : (
         <>

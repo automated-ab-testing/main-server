@@ -4,10 +4,9 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcrypt";
 
-import { type UserRole } from "@prisma/client";
-import { env } from "~/env";
 import { db } from "~/server/db";
 
 /**
@@ -21,13 +20,13 @@ declare module "next-auth" {
     user: DefaultSession["user"] & {
       id: string;
       // ...other properties
-      role: UserRole;
+      username: string;
     };
   }
 
   interface User {
     // ...other properties
-    role: UserRole;
+    username: string;
   }
 }
 
@@ -37,13 +36,23 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
-    session: ({ session, user }) => ({
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.id = user.id;
+        token.username = user.username;
+      }
+      return token;
+    },
+    session: ({ session, token }) => ({
       ...session,
       user: {
         ...session.user,
-        id: user.id,
-        role: user.role,
+        id: token.id,
+        username: token.username,
       },
     }),
   },
@@ -58,9 +67,43 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
-    GithubProvider({
-      clientId: env.GITHUB_ID,
-      clientSecret: env.GITHUB_SECRET,
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // Add logic here to look up the user from the credentials supplied
+        // You can also use the `req` object to access additional parameters
+        // return { id: 1, name: "J Smith", email: "jsmith@example" };
+
+        if (!credentials) throw new Error("AccessDenied");
+
+        const { username, password } = credentials;
+
+        const user = await db.admin.findUnique({
+          where: {
+            username,
+          },
+          select: {
+            id: true,
+            username: true,
+            passwordHash: true,
+          },
+        });
+
+        if (!user) throw new Error("AccessDenied");
+
+        const passwordMatch = await compare(password, user.passwordHash);
+
+        if (!passwordMatch) throw new Error("AccessDenied");
+
+        return {
+          id: user.id,
+          username: user.username,
+        };
+      },
     }),
   ],
 };

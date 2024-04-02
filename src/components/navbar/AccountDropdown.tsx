@@ -15,18 +15,8 @@ export default function AccountDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        {sessionData ? (
-          <Avatar
-            showFallback
-            src={
-              sessionData.user.image !== null
-                ? sessionData.user.image
-                : undefined
-            }
-            name={
-              sessionData.user.name !== null ? sessionData.user.name : undefined
-            }
-          />
+        {sessionData !== null ? (
+          <Avatar name={sessionData.user.username} />
         ) : (
           <Avatar />
         )}

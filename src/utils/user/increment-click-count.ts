@@ -1,21 +1,12 @@
 "use server";
 
-import { UserRole } from "@prisma/client";
-
-import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
 const incrementClickCount = async () => {
-  // Get the server session
-  const session = await getServerAuthSession();
-
-  // If the user is not authenticated or not a user, return
-  if (!session || !session.user || session.user.role !== UserRole.USER) return;
-
   // Update the event log
   await db.eventLog.update({
     where: {
-      userId: session.user.id,
+      deviceId: "bf993b57-db0e-451c-9616-d3525932c4bf",
     },
     data: {
       isClicked: true,

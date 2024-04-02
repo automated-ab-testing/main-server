@@ -1,17 +1,8 @@
 "use server";
 
-import { UserRole } from "@prisma/client";
-
-import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
 const incrementViewCount = async (args: { versionId: string }) => {
-  // Get the server session
-  const session = await getServerAuthSession();
-
-  // If the user is not authenticated or not a user, return
-  if (!session || !session.user || session.user.role !== UserRole.USER) return;
-
   // Get the versionId from the args
   const { versionId } = args;
 
@@ -19,7 +10,7 @@ const incrementViewCount = async (args: { versionId: string }) => {
     // Check if the user has already viewed the component
     const prevEventLog = await tx.eventLog.findUnique({
       where: {
-        userId: session.user.id,
+        deviceId: "bf993b57-db0e-451c-9616-d3525932c4bf",
       },
     });
 
@@ -30,7 +21,7 @@ const incrementViewCount = async (args: { versionId: string }) => {
     await tx.eventLog.create({
       data: {
         versionId,
-        userId: session.user.id,
+        deviceId: "bf993b57-db0e-451c-9616-d3525932c4bf",
       },
     });
   });
