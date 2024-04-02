@@ -22,7 +22,7 @@ export default function AccountDropdown() {
         )}
       </DropdownTrigger>
       <DropdownMenu aria-label="User Event">
-        {sessionData ? (
+        {sessionData !== null ? (
           <DropdownItem
             key="sign-out"
             className="text-danger"

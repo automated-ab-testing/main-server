@@ -20,7 +20,7 @@ export default async function DataCard({ test }: { test: string | undefined }) {
       <Divider />
       {/* NOTE: Data tidak boleh kosong untuk dijalankan pada Chart */}
       <CardBody className="items-center justify-center">
-        {test ? (
+        {test !== undefined ? (
           <BarChart analyticsData={await getAnalytics({ testId: test })} />
         ) : (
           <p className="text-lg">Please select a test!</p>

@@ -41,7 +41,7 @@ export default function SelectTest({
         // Push the URL with the new search params.
         const rawSearchParam = newSearchParams.toString();
         router.push(
-          rawSearchParam ? `${pathname}?${rawSearchParam}` : pathname,
+          rawSearchParam !== "" ? `${pathname}?${rawSearchParam}` : pathname,
         );
       }}
     >
