@@ -2,7 +2,6 @@ import { Button } from "@nextui-org/react";
 
 import ServerComponentWrapper from "~/wrappers/ServerComponentWrapper";
 import ClientComponent from "~/components/main/ClientComponent";
-import CookieButton from "~/components/footer/CookieButton";
 import DataCard from "~/components/analytics/DataCard";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -24,17 +23,14 @@ export default async function HomePage({
       {session !== null ? (
         <DataCard test={test} />
       ) : (
-        <>
-          <CookieButton />
-          <ServerComponentWrapper
-            renderDefault={() => (
-              <Button className="bg-green-500">Default Button</Button>
-            )}
-            renderTest={({ featureFlags }) => (
-              <ClientComponent featureFlags={featureFlags} />
-            )}
-          />
-        </>
+        <ServerComponentWrapper
+          renderDefault={() => (
+            <Button className="bg-green-500">Default Button</Button>
+          )}
+          renderTest={({ featureFlags }) => (
+            <ClientComponent featureFlags={featureFlags} />
+          )}
+        />
       )}
     </main>
   );

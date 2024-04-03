@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CookieConsent from "react-cookie-consent";
 
 import AppNavbar from "~/components/navbar/AppNavbar";
+import createEventLog from "~/utils/user/create-event-log";
 
 export default function RootTemplate({ children }: React.PropsWithChildren) {
   return (
@@ -13,6 +15,12 @@ export default function RootTemplate({ children }: React.PropsWithChildren) {
     >
       <AppNavbar />
       {children}
+      <CookieConsent
+        cookieName="cookie-consent"
+        onAccept={() => void createEventLog()}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </motion.div>
   );
 }
