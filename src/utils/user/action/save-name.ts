@@ -1,14 +1,16 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { db } from "~/server/db";
 
-const incrementClickCount = async () => {
+const saveName = async (args: { formName: string }) => {
   // Get the event log id from the cookies
   const eventLogId = cookies().get("event-log-id");
 
-  if (!eventLogId) return;
+  // If the event log id is not found, redirect to the first page
+  if (!eventLogId) redirect("/");
 
   // Update the event log
   await db.eventLog.update({
@@ -16,9 +18,12 @@ const incrementClickCount = async () => {
       id: eventLogId.value,
     },
     data: {
-      isConsentClicked: true,
+      formName: args.formName,
     },
   });
+
+  // Redirect to the next page
+  redirect("/age");
 };
 
-export default incrementClickCount;
+export default saveName;

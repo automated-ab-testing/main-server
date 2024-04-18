@@ -1,6 +1,8 @@
 "use client";
 
-import incrementClickCount from "~/utils/user/increment-click-count";
+import { toast } from "react-toastify";
+
+import incrementClickCount from "~/utils/user/action/increment-click-count";
 
 export default function ClientComponentWrapper({
   featureFlags,
@@ -16,7 +18,9 @@ export default function ClientComponentWrapper({
   return renderClient({
     getDisplayStatus: (domId) => featureFlags[domId] ?? false,
     emitWin: async () => {
-      await incrementClickCount();
+      await incrementClickCount().catch(() =>
+        toast.error("Something went wrong!"),
+      );
     },
   });
 }

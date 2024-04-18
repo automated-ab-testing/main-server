@@ -1,13 +1,8 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-} from "@nextui-org/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 
-import getTestNames from "~/utils/admin/get-test-names";
-import getAnalytics from "~/utils/admin/get-analytics";
+import getTestNames from "~/utils/admin/fetch/get-test-names";
+import getAnalytics from "~/utils/admin/fetch/get-analytics";
 import SelectTest from "~/components/analytics/SelectTest";
 import BarChart from "~/components/analytics/BarChart";
 

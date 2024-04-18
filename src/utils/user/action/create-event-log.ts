@@ -1,13 +1,14 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import seedrandom from "seedrandom";
 
 import { db } from "~/server/db";
 
 const createEventLog = async () => {
-  // If the user already has an event log id, return
-  if (cookies().has("event-log-id")) return;
+  // If the user already has an event log id, redirect to the next page
+  if (cookies().has("event-log-id")) redirect("/name");
 
   const eventLog = await db.$transaction(async (tx) => {
     // Define the seed for the random number generator
@@ -71,6 +72,9 @@ const createEventLog = async () => {
 
   // If there is a new event log, set the event log id
   if (eventLog) cookies().set("event-log-id", eventLog.id);
+
+  // Redirect to the next page
+  redirect("/name");
 };
 
 export default createEventLog;

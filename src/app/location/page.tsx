@@ -1,17 +1,21 @@
 import { redirect } from "next/navigation";
 
-import LandingPage from "~/components/main/LandingPage";
 import { getServerAuthSession } from "~/server/auth";
+import getLocation from "~/utils/user/fetch/get-location";
+import LocationPage from "~/components/main/LocationPage";
 
-export default async function HomePage() {
+export default async function FormPage() {
   // Get the server session
   const session = await getServerAuthSession();
 
   if (session !== null) redirect("/data");
 
+  // Get the default location
+  const location = await getLocation();
+
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <LandingPage />
+      <LocationPage defaultLocation={location ?? undefined} />
     </main>
   );
 }

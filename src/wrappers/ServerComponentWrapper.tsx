@@ -1,4 +1,4 @@
-import getFeatureFlags from "~/utils/user/get-feature-flags";
+import getFeatureFlags from "~/utils/user/fetch/get-feature-flags";
 
 export default async function ServerComponentWrapper({
   renderDefault,
