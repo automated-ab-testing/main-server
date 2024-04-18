@@ -1,12 +1,12 @@
 "use client";
 
+import { Avatar } from "@nextui-org/avatar";
 import {
-  Avatar,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@nextui-org/react";
+} from "@nextui-org/dropdown";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function AccountDropdown() {

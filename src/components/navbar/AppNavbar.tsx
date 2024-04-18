@@ -3,7 +3,7 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/react";
+} from "@nextui-org/navbar";
 
 import ThemeSwitcher from "~/components/navbar/ThemeSwitcher";
 import AccountDropdown from "~/components/navbar/AccountDropdown";

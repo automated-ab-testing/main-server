@@ -1,4 +1,4 @@
-import { Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
 
 import ServerComponentWrapper from "~/wrappers/ServerComponentWrapper";
 import ClientComponent from "~/components/main/ClientComponent";

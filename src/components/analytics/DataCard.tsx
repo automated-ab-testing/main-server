@@ -3,8 +3,8 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
-} from "@nextui-org/react";
+} from "@nextui-org/card";
+import { Divider } from "@nextui-org/divider";
 
 import getTestNames from "~/utils/admin/get-test-names";
 import getAnalytics from "~/utils/admin/get-analytics";
