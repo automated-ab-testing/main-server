@@ -19,7 +19,7 @@ export default async function DataPage({
   if (session === null) redirect("/");
 
   return (
-    <main className="min-h-screen items-center justify-center">
+    <main className="flex min-h-screen items-center justify-center">
       <DataCard test={test} />
     </main>
   );

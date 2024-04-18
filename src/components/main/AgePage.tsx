@@ -58,6 +58,7 @@ export default function AgePage({
         type="number"
         label="Age"
         placeholder="Enter your age"
+        isInvalid={errors.formAge !== undefined}
         errorMessage={errors.formAge?.message}
       />
       <Button type="submit">Next</Button>

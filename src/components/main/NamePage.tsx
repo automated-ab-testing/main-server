@@ -55,6 +55,7 @@ export default function NamePage({
         {...register("formName")}
         label="Name"
         placeholder="Your name"
+        isInvalid={errors.formName !== undefined}
         errorMessage={errors.formName?.message}
       />
       <Button type="submit">Next</Button>

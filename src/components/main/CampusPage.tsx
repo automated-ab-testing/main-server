@@ -58,6 +58,7 @@ export default function CampusPage({
         type="text"
         label="Campus"
         placeholder="Enter your campus"
+        isInvalid={errors.formCampus !== undefined}
         errorMessage={errors.formCampus?.message}
       />
       <Button type="submit">Next</Button>

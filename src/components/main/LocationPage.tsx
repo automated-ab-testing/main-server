@@ -58,6 +58,7 @@ export default function LocationPage({
       <Input
         {...register("formLocation")}
         placeholder="Location"
+        isInvalid={errors.formLocation !== undefined}
         errorMessage={errors.formLocation?.message}
       />
       <Button type="submit">Next</Button>

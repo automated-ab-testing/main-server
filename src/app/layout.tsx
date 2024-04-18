@@ -3,6 +3,7 @@ import ComponentProvider from "~/providers/ComponentProvider";
 import ThemeProvider from "~/providers/ThemeProvider";
 import { getServerAuthSession } from "~/server/auth";
 
+import "react-toastify/dist/ReactToastify.css";
 import "~/styles/globals.css";
 
 export const metadata = {

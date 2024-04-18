@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "~/server/db";
 
-const incrementClickCount = async () => {
+const setSubmitted = async () => {
   // Get the event log id from the cookies
   const eventLogId = cookies().get("event-log-id");
 
@@ -18,9 +18,12 @@ const incrementClickCount = async () => {
       id: eventLogId.value,
     },
     data: {
-      isConsentClicked: true,
+      isFormSubmitted: true,
     },
   });
+
+  // Redirect to the first page
+  redirect("/");
 };
 
-export default incrementClickCount;
+export default setSubmitted;

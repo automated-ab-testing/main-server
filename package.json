@@ -18,7 +18,7 @@
     "seed": "tsx ./node_modules/@automated-ab-testing/shared-prisma-schema/index.ts"
   },
   "dependencies": {
-    "@automated-ab-testing/shared-prisma-schema": "git+https://github.com/automated-ab-testing/shared-prisma-schema.git#5a6f822198789852244f82568de9887dcb12e6ac",
+    "@automated-ab-testing/shared-prisma-schema": "git+https://github.com/automated-ab-testing/shared-prisma-schema.git#16e5c953f84a44c2dc1243372ad459a11996dbd4",
     "@hookform/resolvers": "^3.3.4",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@nextui-org/react": "^2.3.3",

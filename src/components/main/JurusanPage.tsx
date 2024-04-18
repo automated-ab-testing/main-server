@@ -55,6 +55,7 @@ export default function JurusanPage({
         {...register("formJurusan")}
         label="Jurusan"
         placeholder="Jurusan"
+        isInvalid={errors.formJurusan !== undefined}
         errorMessage={errors.formJurusan?.message}
       />
       <Button type="submit">Next</Button>

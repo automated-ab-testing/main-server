@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 import AppNavbar from "~/components/navbar/AppNavbar";
 
 export default function RootTemplate({ children }: React.PropsWithChildren) {
