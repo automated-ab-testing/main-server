@@ -18,7 +18,7 @@ export default function BarChart({
   const data = useMemo(
     (): UserSerie<MyDatum>[] =>
       Object.entries(analyticsData).map(([title, rawData]) => ({
-        title,
+        label: title,
         data: Object.entries(rawData).map(([version, amount]) => ({
           version,
           amount,
@@ -41,6 +41,7 @@ export default function BarChart({
       {
         getValue: (datum) => datum.amount,
         elementType: "bar",
+        min: 0,
       },
     ],
     [],
