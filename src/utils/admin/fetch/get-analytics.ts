@@ -21,7 +21,7 @@ const getAnalytics = cache(async (args: { testId: string }) => {
       // Get the label and id of all versions for the test
       const versions = await tx.version.findMany({
         where: { testId },
-        select: { id: true, label: true },
+        select: { id: true, isPreferred: true },
       });
 
       // Get the count of impressions for each version
@@ -61,7 +61,8 @@ const getAnalytics = cache(async (args: { testId: string }) => {
       const count = countImpressions.find((c) => c.versionId === curr.id);
 
       // Add the count to the pivot object
-      acc[curr.label] = count !== undefined ? count._count.id : 0;
+      acc[curr.isPreferred ? "A" : "B"] =
+        count !== undefined ? count._count.id : 0;
 
       // Return the pivot object
       return acc;
@@ -75,7 +76,8 @@ const getAnalytics = cache(async (args: { testId: string }) => {
       const count = countClicks.find((c) => c.versionId === curr.id);
 
       // Add the count to the pivot object
-      acc[curr.label] = count !== undefined ? count._count.id : 0;
+      acc[curr.isPreferred ? "A" : "B"] =
+        count !== undefined ? count._count.id : 0;
 
       // Return the pivot object
       return acc;

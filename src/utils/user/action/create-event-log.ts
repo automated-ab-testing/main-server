@@ -27,7 +27,7 @@ const createEventLog = async () => {
     // If there are no active tests, return empty data
     if (activeTests.length === 0) return null;
 
-    // Randomly select one active test (deterministically using the seed)
+    // Randomly select one active test
     const randomTestIdx =
       ((rng.int32() % activeTests.length) + activeTests.length) %
       activeTests.length;
@@ -48,8 +48,8 @@ const createEventLog = async () => {
     // If there are no versions in the active test, return empty data
     if (versions.length === 0) return null;
 
-    // Randomly select one version in the active test (deterministically using the seed)
-    // NOTE: Distribusi peluang dapat diubah dengan menggunakan HMM
+    // Randomly select one version in the active test
+    // TODO: Distribusi peluang dapat diubah dengan menggunakan HMM
     const randomVersionIdx =
       ((rng.int32() % versions.length) + versions.length) % versions.length;
     const randomVersion = versions[randomVersionIdx];
