@@ -1,9 +1,9 @@
 import AuthProvider from "~/providers/AuthProvider";
 import ComponentProvider from "~/providers/ComponentProvider";
 import ThemeProvider from "~/providers/ThemeProvider";
+import ToastProvider from "~/providers/ToastProvider";
 import { getServerAuthSession } from "~/server/auth";
 
-import "react-toastify/dist/ReactToastify.css";
 import "~/styles/globals.css";
 
 export const metadata = {
@@ -24,7 +24,9 @@ export default async function RootLayout({
       <body>
         <AuthProvider session={session}>
           <ComponentProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </ThemeProvider>
           </ComponentProvider>
         </AuthProvider>
       </body>

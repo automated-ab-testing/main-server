@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ToastContainer } from "react-toastify";
 
 import AppNavbar from "~/components/navbar/AppNavbar";
 
@@ -14,7 +13,6 @@ export default function RootTemplate({ children }: React.PropsWithChildren) {
     >
       <AppNavbar />
       {children}
-      <ToastContainer />
     </motion.div>
   );
 }
