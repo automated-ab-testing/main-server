@@ -36,30 +36,86 @@ const createEventLog = async () => {
     if (!randomTest) return null;
 
     // Get all versions in the active test
-    const versions = await tx.version.findMany({
+    const versionA = await tx.version.findUnique({
       where: {
-        testId: randomTest.id,
+        testId_isPreferred: {
+          testId: randomTest.id,
+          isPreferred: true,
+        },
       },
       select: {
         id: true,
       },
     });
 
-    // If there are no versions in the active test, return empty data
-    if (versions.length === 0) return null;
+    if (!versionA) return null;
 
-    // Randomly select one version in the active test
-    // TODO: Distribusi peluang dapat diubah dengan menggunakan HMM
-    const randomVersionIdx =
-      ((rng.int32() % versions.length) + versions.length) % versions.length;
-    const randomVersion = versions[randomVersionIdx];
+    const versionB = await tx.version.findUnique({
+      where: {
+        testId_isPreferred: {
+          testId: randomTest.id,
+          isPreferred: false,
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
 
-    if (!randomVersion) return null;
+    if (!versionB) return null;
 
-    // Create a new event log
+    // Fetch the latest fifty submitted event logs for version A and version B
+    const submittedEventLogs = await tx.eventLog.findMany({
+      select: {
+        versionId: true,
+        isConsentClicked: true,
+      },
+      where: {
+        versionId: {
+          in: [versionA.id, versionB.id],
+        },
+        isFormSubmitted: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 50, // This is hardcoded for simplicity
+    });
+
+    // Count the number of submitted event logs
+    const submittedCount = submittedEventLogs.length;
+
+    // Get the event logs for the consent clicked
+    const consentClickedEventLogs = submittedEventLogs.filter(
+      (eventLog) => eventLog.isConsentClicked,
+    );
+
+    // Count the number of clicked event logs for each version
+    const clickedVersionACount = consentClickedEventLogs.filter(
+      (eventLog) => eventLog.versionId === versionA.id,
+    ).length;
+
+    const clickedVersionBCount = consentClickedEventLogs.filter(
+      (eventLog) => eventLog.versionId === versionB.id,
+    ).length;
+
+    // Randomly select the version using HMM
+    const hmmVersion =
+      clickedVersionACount >= clickedVersionBCount
+        ? rng.quick() < 0.5 // HMM is not activated
+          ? versionA
+          : versionB
+        : rng.quick() <
+            0.5 +
+              (0.5 * (clickedVersionBCount - clickedVersionACount)) /
+                submittedCount // HMM is activated
+          ? versionA
+          : versionB;
+
+    // Create a new event log with the selected version
     const newEventLog = await tx.eventLog.create({
       data: {
-        versionId: randomVersion.id,
+        versionId: hmmVersion.id,
       },
       select: {
         id: true,

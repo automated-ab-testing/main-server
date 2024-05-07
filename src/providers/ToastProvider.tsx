@@ -1,8 +1,8 @@
 "use client";
 
-import "react-toastify/dist/ReactToastify.css";
-
 import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ToastProvider({ children }: React.PropsWithChildren) {
   return (
