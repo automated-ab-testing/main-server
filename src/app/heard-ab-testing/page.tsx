@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
 import { getServerAuthSession } from "~/server/auth";
-import getConsentClicked from "~/utils/user/fetch/get-consent-clicked";
-import ConsentPage from "~/components/main/ConsentPage";
+import getHeardABTesting from "~/utils/user/fetch/get-heard-ab-testing";
+import HeardPage from "~/components/main/HeardPage";
 
 export default async function FormPage() {
   // Get the server session
@@ -10,12 +10,12 @@ export default async function FormPage() {
 
   if (session !== null) redirect("/data");
 
-  // Get the default consent clicked
-  const consentClicked = await getConsentClicked();
+  // Get default is heard
+  const heard = await getHeardABTesting();
 
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <ConsentPage defaultConsentClicked={consentClicked} />
+      <HeardPage defaultFormHeard={heard} />
     </main>
   );
 }

@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
 import { getServerAuthSession } from "~/server/auth";
-import getConsentClicked from "~/utils/user/fetch/get-consent-clicked";
-import ConsentPage from "~/components/main/ConsentPage";
+import getExperienceABTesting from "~/utils/user/fetch/get-experience-ab-testing";
+import ExperiencePage from "~/components/main/ExperiencePage";
 
 export default async function FormPage() {
   // Get the server session
@@ -10,12 +10,12 @@ export default async function FormPage() {
 
   if (session !== null) redirect("/data");
 
-  // Get the default consent clicked
-  const consentClicked = await getConsentClicked();
+  // Get the default experience-ab-testing
+  const formExperience = await getExperienceABTesting();
 
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <ConsentPage defaultConsentClicked={consentClicked} />
+      <ExperiencePage defaultFormExperience={formExperience ?? undefined} />
     </main>
   );
 }

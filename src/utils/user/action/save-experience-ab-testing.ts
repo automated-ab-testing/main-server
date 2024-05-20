@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "~/server/db";
 
-const setConsentClicked = async (args: { formConsent: boolean }) => {
+const saveExperienceABTesting = async (args: { formExperience: string }) => {
   // Get the event log id from the cookies
   const eventLogId = cookies().get("event-log-id");
 
@@ -18,15 +18,12 @@ const setConsentClicked = async (args: { formConsent: boolean }) => {
       id: eventLogId.value,
     },
     data: {
-      isConsentClicked: args.formConsent,
+      experienceAboutAB: args.formExperience,
     },
   });
 
-  // If the form consent is false, redirect to the finish page
-  if (!args.formConsent) redirect("/finish");
-
-  // Else, redirect to the heard AB testing page
-  redirect("/heard-ab-testing");
+  // Redirect to finish page
+  redirect("/finish");
 };
 
-export default setConsentClicked;
+export default saveExperienceABTesting;

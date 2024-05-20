@@ -10,7 +10,7 @@ export default async function FormPage() {
 
   if (session !== null) redirect("/data");
 
-  // Get the default location
+  // Get the default jurusan
   const jurusan = await getJurusan();
 
   return (

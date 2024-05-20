@@ -38,7 +38,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@automated-ab-testing/shared-prisma-schema": "git+https://github.com/automated-ab-testing/shared-prisma-schema.git#efc2e077376f1a0914887d79489ead6221086b68",
+    "@automated-ab-testing/shared-prisma-schema": "git+https://github.com/automated-ab-testing/shared-prisma-schema.git#317f6a8ff21517199e13095b420652dfe6b4e5fa",
     "@types/bcrypt": "^5.0.2",
     "@types/eslint": "^8.44.7",
     "@types/node": "^18.17.0",
