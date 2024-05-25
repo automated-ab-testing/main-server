@@ -99,14 +99,17 @@ const createEventLog = async () => {
       (eventLog) => eventLog.versionId === versionB.id,
     ).length;
 
+    // Define PI
+    const PI = 0.5;
+
     // Randomly select the version using HMM
     const hmmVersion =
       clickedVersionACount >= clickedVersionBCount
-        ? rng.quick() < 0.5 // HMM is not activated
+        ? rng.quick() < PI // HMM is not activated
           ? versionA
           : versionB
         : rng.quick() <
-            0.5 +
+            PI +
               (0.5 * (clickedVersionBCount - clickedVersionACount)) /
                 submittedCount // HMM is activated
           ? versionA
